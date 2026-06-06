@@ -1,0 +1,18 @@
+[package]
+name = "db"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+actix-rt = "2.11.0"
+actix-web = "4.13.0"
+chrono = { version = "0.4.45", features = ["serde"] }
+dotenv = "0.15.0"
+openssl = { version = "0.10.80", features = ["vendored"] }
+serde = { version = "1.0.228", features = ["derive"] }
+sqlx = { version = "0.8.0", features = [
+    "postgres",
+    "runtime-tokio",
+    "macros",
+    "chrono",
+] }
