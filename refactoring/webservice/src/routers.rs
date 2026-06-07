@@ -1,4 +1,5 @@
-use super::handlers::*;
+use crate::handlers::general::*;
+use crate::handlers::course::*;
 use actix_web::web;
 
 
@@ -11,8 +12,13 @@ pub fn course_routes(cfg: &mut web::ServiceConfig) {
         web::scope("/courses")
             // to的参数为什么是一个异步函数？
             // 为什么一个异步函数是一个Handler? blanket implementation
-            .route("/", web::post().to(new_course))
-            .route("/{user_id}", web::get().to(get_courses_for_teacher))
-            .route("/{user_id}/{course_id}", web::get().to(get_course_detail))
+            .route("/", web::post().to(post_new_course))
+            .route("/{teacher_id}", web::get().to(get_courses_for_teacher))
+            .route("/{teacher_id}/{course_id}", web::get().to(get_course_detail))
+            .route("/{teacher_id}/{course_id}", web::delete().to(delete_course))
+            .route(
+                "/{teacher_id}/{course_id}",
+                web::put().to(update_course_details),
+            ),
     );
 }
